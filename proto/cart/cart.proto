@@ -1,4 +1,5 @@
 syntax = "proto3";
+package micro.cart;
 
 option go_package = "proto/cart";
 
