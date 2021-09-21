@@ -1,9 +1,9 @@
 package repository
 
-import "cart/domain/model"
+import "github.com/yann1989/cart/domain/model"
 
 type ICartRepository interface {
-	InitTable () error
+	InitTable() error
 	FindCartByID(id int64) (*model.Cart, error)
 	FindAll(int64) ([]model.Cart, error)
 	DeleteCartByID(id int64) error

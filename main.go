@@ -1,9 +1,6 @@
 package main
 
 import (
-	"cart/domain/repository"
-	service2 "cart/domain/service"
-	"cart/handler"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/micro/go-micro/v2"
@@ -11,11 +8,14 @@ import (
 	"github.com/micro/go-plugins/wrapper/ratelimiter/uber/v2"
 	opentracing2 "github.com/micro/go-plugins/wrapper/trace/opentracing/v2"
 	"github.com/opentracing/opentracing-go"
+	"github.com/yann1989/cart/domain/repository"
+	service2 "github.com/yann1989/cart/domain/service"
+	"github.com/yann1989/cart/handler"
 	"github.com/yann1989/common"
 	"os"
 
-	cart "cart/proto/cart"
 	_ "github.com/go-sql-driver/mysql"
+	cart "github.com/yann1989/cart/proto/cart"
 )
 
 const QPS = 100 //每秒处理数量
@@ -29,8 +29,6 @@ func main() {
 	}
 	//注册中心
 	consulRegistry := common.GetConsulRegistry("127.0.0.1", 8500)
-
-
 
 	// 链路追踪
 	tracer, closer, err := common.NewTracer("micro.cart", "127.0.0.1:6831")
@@ -57,7 +55,6 @@ func main() {
 	}
 	defer mysqlDb.Close()
 	mysqlDb.SingularTable(true)
-
 
 	// New Service
 	srv := micro.NewService(

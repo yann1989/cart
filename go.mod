@@ -1,4 +1,4 @@
-module cart
+module github.com/yann1989/cart
 
 go 1.13
 
